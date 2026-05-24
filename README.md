@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inventory Reservation System
 
-## Getting Started
+## Live URL
 
-First, run the development server:
+https://inventory-reservation-system-liard.vercel.app
+
+---
+
+## GitHub Repository
+
+https://github.com/nithi-05K/inventory-reservation-system
+
+---
+
+# Tech Stack
+
+- Next.js
+- TypeScript
+- Prisma
+- PostgreSQL (Supabase)
+- Vercel
+
+---
+
+# Features
+
+- Create inventory reservations
+- Confirm reservations
+- PostgreSQL database integration
+- Prisma ORM support
+- Live deployment using Vercel
+
+---
+
+# Run Locally
+
+## Clone Repository
+
+```bash
+git clone https://github.com/nithi-05K/inventory-reservation-system.git
+```
+
+---
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=your_database_url
+DIRECT_URL=your_direct_database_url
+```
+
+---
+
+## Prisma Generate
+
+```bash
+npx prisma generate
+```
+
+---
+
+## Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# API Endpoints
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Create Reservation
 
-## Learn More
+### Endpoint
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+POST /api/reservations
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Example Request Body
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```json
+{
+  "productId": "cmpjk3ulg00006vvxmtlxfbhg",
+  "warehouseId": "cmpjk3uut00026vvx0juq0lvg",
+  "quantity": 2
+}
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Confirm Reservation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Endpoint
+
+```bash
+POST /api/reservations/:id/confirm
+```
+
+---
+
+# Expiry Mechanism
+
+Reservations are initially created with a `PENDING` status and an expiry timestamp.
+The reservation can later be confirmed using the confirm endpoint.
+
+Expired reservations can be cleaned up and inventory restored using background jobs or scheduled cleanup logic.
+
+---
+
+# Tradeoffs
+
+- Focused mainly on backend API functionality.
+- Frontend UI was intentionally kept minimal.
+- Redis/background worker support was not implemented due to time constraints.
+- Priority was given to deployment stability and API correctness.
+
+---
+
+# Deployment
+
+- Frontend hosted on Vercel
+- PostgreSQL hosted on Supabase
+
+---
+
+# Author
+
+Nithitha K
