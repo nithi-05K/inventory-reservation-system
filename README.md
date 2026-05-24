@@ -2,7 +2,7 @@
 
 ## Live URL
 
-https://inventory-reservation-system-liard.vercel.app
+https://inventory-reservation-system-liard.vercel.app/
 
 ---
 
@@ -12,27 +12,43 @@ https://github.com/nithi-05K/inventory-reservation-system
 
 ---
 
+# Project Overview
+
+This project is a backend-focused inventory reservation system built using Next.js, Prisma, PostgreSQL, and Vercel.
+
+The system allows users to:
+
+- Create inventory reservations
+- Confirm reservations
+- Track reservation status
+- Manage inventory using PostgreSQL
+
+The project demonstrates API design, database integration, deployment, and reservation workflow handling.
+
+---
+
 # Tech Stack
 
-- Next.js
+- Next.js 16
 - TypeScript
-- Prisma
+- Prisma ORM
 - PostgreSQL (Supabase)
-- Vercel
+- Vercel Deployment
 
 ---
 
 # Features
 
-- Create inventory reservations
-- Confirm reservations
+- Reservation creation API
+- Reservation confirmation API
 - PostgreSQL database integration
 - Prisma ORM support
 - Live deployment using Vercel
+- Hosted database using Supabase
 
 ---
 
-# Run Locally
+# Local Setup
 
 ## Clone Repository
 
@@ -50,9 +66,9 @@ npm install
 
 ---
 
-## Environment Variables
+# Environment Variables
 
-Create a `.env` file:
+Create a `.env` file in the root folder.
 
 ```env
 DATABASE_URL=your_database_url
@@ -61,15 +77,23 @@ DIRECT_URL=your_direct_database_url
 
 ---
 
-## Prisma Generate
+# Prisma Setup
+
+## Generate Prisma Client
 
 ```bash
 npx prisma generate
 ```
 
+## Push Database Schema
+
+```bash
+npx prisma db push
+```
+
 ---
 
-## Run Development Server
+# Run Development Server
 
 ```bash
 npm run dev
@@ -109,12 +133,22 @@ POST /api/reservations/:id/confirm
 
 ---
 
+# Reservation Flow
+
+1. Create a reservation using the reservations API.
+2. Reservation is stored with `PENDING` status.
+3. Confirm reservation using the confirm endpoint.
+4. Reservation status becomes `CONFIRMED`.
+
+---
+
 # Expiry Mechanism
 
-Reservations are initially created with a `PENDING` status and an expiry timestamp.
-The reservation can later be confirmed using the confirm endpoint.
+Reservations are created with a pending state and expiry timestamp.
 
-Expired reservations can be cleaned up and inventory restored using background jobs or scheduled cleanup logic.
+Expired reservations can later be cleaned up and inventory restored using scheduled cleanup logic or background jobs.
+
+For this implementation, the focus was mainly on API functionality and deployment stability.
 
 ---
 
@@ -122,14 +156,15 @@ Expired reservations can be cleaned up and inventory restored using background j
 
 - Focused mainly on backend API functionality.
 - Frontend UI was intentionally kept minimal.
-- Redis/background worker support was not implemented due to time constraints.
-- Priority was given to deployment stability and API correctness.
+- Redis and distributed locking were not implemented due to time constraints.
+- Background workers and automated expiry cleanup were not added.
+- Priority was given to deployment stability, Prisma integration, and API correctness.
 
 ---
 
 # Deployment
 
-- Frontend hosted on Vercel
+- Frontend/API deployed on Vercel
 - PostgreSQL hosted on Supabase
 
 ---
