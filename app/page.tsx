@@ -106,7 +106,7 @@ export default function Home() {
     if (response.ok) {
 
       setMessage(
-        "Reservation confirmed"
+        "Reservation confirmed successfully"
       );
 
       fetchProducts();
@@ -135,7 +135,7 @@ export default function Home() {
     if (response.ok) {
 
       setMessage(
-        "Reservation released"
+        "Reservation released successfully"
       );
 
       fetchProducts();
@@ -154,29 +154,42 @@ export default function Home() {
       style={{
         padding: "40px",
         fontFamily: "Arial",
+        backgroundColor: "#f5f5f5",
+        minHeight: "100vh",
       }}
     >
 
       <h1
         style={{
           fontSize: "48px",
-          marginBottom: "20px",
+          marginBottom: "10px",
         }}
       >
         Inventory Reservation System
       </h1>
 
+      <p
+        style={{
+          marginBottom: "30px",
+          fontSize: "18px",
+        }}
+      >
+        Reserve and manage inventory items.
+      </p>
+
       {message && (
 
-        <p
+        <div
           style={{
-            padding: "10px",
-            background: "#eee",
+            backgroundColor: "#d1fae5",
+            padding: "15px",
+            borderRadius: "10px",
             marginBottom: "20px",
+            fontWeight: "bold",
           }}
         >
           {message}
-        </p>
+        </div>
       )}
 
       <div
@@ -192,13 +205,18 @@ export default function Home() {
             key={item.id}
 
             style={{
-              border: "1px solid #ccc",
-              padding: "20px",
-              borderRadius: "10px",
+              backgroundColor: "white",
+              padding: "25px",
+              borderRadius: "12px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
             }}
           >
 
-            <h2>
+            <h2
+              style={{
+                marginBottom: "10px",
+              }}
+            >
               {item.product.name}
             </h2>
 
@@ -207,19 +225,19 @@ export default function Home() {
             </p>
 
             <p>
-              Warehouse:
+              <strong>Warehouse:</strong>
               {" "}
               {item.warehouse.name}
             </p>
 
             <p>
-              Location:
+              <strong>Location:</strong>
               {" "}
               {item.warehouse.location}
             </p>
 
             <p>
-              Available Stock:
+              <strong>Available Stock:</strong>
               {" "}
               {item.totalUnits - item.reservedUnits}
             </p>
@@ -233,9 +251,14 @@ export default function Home() {
               }
 
               style={{
-                padding: "10px 20px",
-                marginTop: "10px",
+                padding: "12px 24px",
+                backgroundColor: "#2563eb",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
                 cursor: "pointer",
+                marginTop: "15px",
+                fontSize: "16px",
               }}
             >
               Reserve
@@ -250,15 +273,27 @@ export default function Home() {
         <div
           style={{
             marginTop: "40px",
+            backgroundColor: "white",
+            padding: "25px",
+            borderRadius: "12px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
           }}
         >
 
-          <h2>
+          <h2
+            style={{
+              marginBottom: "15px",
+            }}
+          >
             Reservation Actions
           </h2>
 
-          <p>
-            Reservation ID:
+          <p
+            style={{
+              marginBottom: "20px",
+            }}
+          >
+            <strong>Reservation ID:</strong>
             {" "}
             {reservationId}
           </p>
@@ -267,8 +302,14 @@ export default function Home() {
             onClick={confirmReservation}
 
             style={{
-              padding: "10px 20px",
+              padding: "12px 24px",
+              backgroundColor: "black",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
               marginRight: "10px",
+              fontSize: "16px",
             }}
           >
             Confirm Purchase
@@ -278,7 +319,13 @@ export default function Home() {
             onClick={releaseReservation}
 
             style={{
-              padding: "10px 20px",
+              padding: "12px 24px",
+              backgroundColor: "#dc2626",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontSize: "16px",
             }}
           >
             Cancel Reservation
@@ -289,4 +336,5 @@ export default function Home() {
 
     </main>
   );
+}
 }
